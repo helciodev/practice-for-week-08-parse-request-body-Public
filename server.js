@@ -11,7 +11,10 @@ server = http.createServer((request, response) => {
   request.on("data", (data) => {
     reqBody += data;
   });
-  request.on("end", () => {});
+  request.on("end", () => {
+    request.body = parseBody(reqBody);
+    sendFormPage(request, response);
+  });
 });
 
 const port = 5000;
