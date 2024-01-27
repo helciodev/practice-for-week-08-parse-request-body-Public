@@ -7,7 +7,8 @@ let server;
 /******************************************************************************/
 /******************* DO NOT CHANGE THE CODE ABOVE THIS LINE *******************/
 server = http.createServer((request, response) => {
-  log(request);
+  const { url, method } = request;
+  log(url, method);
 });
 
 const port = 5000;
