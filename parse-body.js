@@ -1,25 +1,45 @@
 function firstStep(input) {
-  // Your code here
+  const removedAnd = input.split("&");
+  return removedAnd;
 }
 
 function secondStep(input) {
-  // Your code here
+  const removedEqual = input.map((el) => el.split("="));
+  return removedEqual;
 }
 
 function thirdStep(input) {
-  // Your code here
+  const removedPlus = input.map((el) =>
+    el.map((innerEl) => innerEl.replaceAll("+", " "))
+  );
+  return removedPlus;
 }
 
 function fourthStep(input) {
-  // Your code here
+  const decoded = input.map((el) => el.map((el) => decodeURIComponent(el)));
+  return decoded;
 }
 
 function fifthStep(input) {
-  // Your code here
+  const objResponse = input.reduce((obj, currentEl) => {
+    currentEl.forEach((currentVal, index, currentEl) => {
+      if (index === 1) {
+        obj[currentEl[index - 1]] = currentVal;
+      }
+    });
+    return obj;
+  }, {});
+
+  return objResponse;
 }
 
 function parseBody(str) {
-  // Your code here
+  const first = firstStep(str);
+  const second = secondStep(first);
+  const third = thirdStep(second);
+  const fourth = fourthStep(third);
+  const parsedBodyObj = fifthStep(fourth);
+  return parsedBodyObj;
 }
 
 /******************************************************************************/
@@ -31,5 +51,5 @@ module.exports = {
   thirdStep,
   fourthStep,
   fifthStep,
-  parseBody
+  parseBody,
 };

@@ -7,13 +7,16 @@ let server;
 /******************************************************************************/
 /******************* DO NOT CHANGE THE CODE ABOVE THIS LINE *******************/
 server = http.createServer((request, response) => {
-  const { url, method } = request;
-  log(url, method);
+  let reqBody = "";
+  request.on("data", (data) => {
+    reqBody += data;
+  });
+  request.on("end", () => {});
 });
 
 const port = 5000;
 
-server.listen(port, log("Successfully started the server on port 5000 ", port));
+server.listen(port, log("Successfully started the server on port ", port));
 /******************************************************************************/
 /******************* DO NOT CHANGE THE CODE BELOW THIS LINE *******************/
 
